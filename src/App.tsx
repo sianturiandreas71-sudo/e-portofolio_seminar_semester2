@@ -1,29 +1,29 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/Layout';
-import Home from '@/pages/Home';
-import About from '@/pages/About';
-import Reflections from '@/pages/Reflections';
-import CourseDetail from '@/pages/CourseDetail';
-import Documentation from '@/pages/Documentation';
-import PdfViewer from '@/pages/PdfViewer';
-import Artifacts from '@/pages/Artifacts';
-import Admin from '@/pages/Admin';
-import PracticalConnections from '@/pages/PracticalConnections';
+import Beranda from '@/pages/Beranda';
+import Tentang from '@/pages/Tentang';
+import RefleksiList from '@/pages/RefleksiList';
+import RefleksiPengalaman from '@/pages/RefleksiPengalaman';
+import KaitanPraktis from '@/pages/KaitanPraktis';
+import DesainKaryaInovatif from '@/pages/DesainKaryaInovatif';
+import Dokumentasi from '@/pages/Dokumentasi';
+import Artefak from '@/pages/Artefak';
+import Kelola from '@/pages/Kelola';
 
 function App() {
   return (
     <HashRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/tentang" element={<About />} />
-          <Route path="/refleksi" element={<Reflections />} />
-          <Route path="/refleksi/:courseId" element={<CourseDetail />} />
-          <Route path="/refleksi/:courseId/dokumen" element={<PdfViewer />} />
-          <Route path="/kaitan-praktis" element={<PracticalConnections />} />
-          <Route path="/dokumentasi" element={<Documentation />} />
-          <Route path="/artefak" element={<Artifacts />} />
-          <Route path="/kelola" element={<Admin />} />
+          <Route path="/" element={<Beranda />} />
+          <Route path="/tentang" element={<Tentang />} />
+          <Route path="/refleksi" element={<RefleksiList />} />
+          <Route path="/refleksi-pengalaman" element={<RefleksiPengalaman />} />
+          <Route path="/kaitan-praktis" element={<KaitanPraktis />} />
+          <Route path="/desain-karya" element={<DesainKaryaInovatif />} />
+          <Route path="/dokumentasi" element={<Dokumentasi />} />
+          <Route path="/artefak" element={<Artefak />} />
+          <Route path="/kelola" element={<Kelola />} />
         </Route>
       </Routes>
     </HashRouter>
