@@ -10,6 +10,7 @@ import DesainKaryaInovatif from '@/pages/DesainKaryaInovatif';
 import Dokumentasi from '@/pages/Dokumentasi';
 import Artefak from '@/pages/Artefak';
 import Kelola from '@/pages/Kelola';
+import Login from '@/pages/Login';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/dokumentasi" element={<Dokumentasi />} />
             <Route path="/artefak" element={<Artefak />} />
             <Route path="/kelola" element={<Kelola />} />
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </HashRouter>
