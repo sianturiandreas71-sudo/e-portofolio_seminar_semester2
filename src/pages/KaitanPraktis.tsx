@@ -6,7 +6,7 @@ import { supabase, type KaitanPraktisItem } from '@/lib/supabase';
 export default function KaitanPraktisPage() {
   const [items, setItems] = useState<KaitanPraktisItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [openCourse, setOpenCourse] = useState<string | null>(null);
+  const [openCourses, setOpenCourses] = useState<string[]>([]);
 
   useEffect(() => {
     supabase
@@ -20,6 +20,20 @@ export default function KaitanPraktisPage() {
         setLoading(false);
       });
   }, []);
+
+  const toggleCourse = (courseName: string, e: React.MouseEvent<HTMLButtonElement>) => {
+    const buttonElement = e.currentTarget;
+    
+    setOpenCourses((prev) =>
+      prev.includes(courseName)
+        ? prev.filter((c) => c !== courseName)
+        : [...prev, courseName]
+    );
+
+    setTimeout(() => {
+      buttonElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  };
 
   if (loading) {
     return (
@@ -46,12 +60,12 @@ export default function KaitanPraktisPage() {
       ) : (
         <div className="space-y-4">
           {items.map((item) => {
-            const isOpen = openCourse === item.course;
+            const isOpen = openCourses.includes(item.course);
             return (
               <div key={item.id} className="border border-gray-200 bg-white">
                 {/* Course header */}
                 <button
-                  onClick={() => setOpenCourse(isOpen ? null : item.course)}
+                  onClick={(e) => toggleCourse(item.course, e)}
                   className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
                 >
                   <div className="flex items-center gap-3 min-w-0">
