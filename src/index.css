@@ -23,10 +23,17 @@ body {
   }
 }
 
+/* Judul besar tetap terunci rata kiri / sesuai aturan elemennya */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Times New Roman', Times, serif;
   line-height: 1.3;
   font-weight: 700;
+  text-align: left;
+}
+
+/* Hanya kalimat/paragraf isi yang dibuat rata kanan-kiri */
+p {
+  text-align: justify;
 }
 
 /* Scrollbar for academic feel */
