@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '@/context/AuthContext';
 import Layout from '@/components/Layout';
 import Beranda from '@/pages/Beranda';
 import Tentang from '@/pages/Tentang';
@@ -12,21 +13,23 @@ import Kelola from '@/pages/Kelola';
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Beranda />} />
-          <Route path="/tentang" element={<Tentang />} />
-          <Route path="/refleksi" element={<RefleksiList />} />
-          <Route path="/refleksi-pengalaman" element={<RefleksiPengalaman />} />
-          <Route path="/kaitan-praktis" element={<KaitanPraktis />} />
-          <Route path="/desain-karya" element={<DesainKaryaInovatif />} />
-          <Route path="/dokumentasi" element={<Dokumentasi />} />
-          <Route path="/artefak" element={<Artefak />} />
-          <Route path="/kelola" element={<Kelola />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <AuthProvider>
+      <HashRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Beranda />} />
+            <Route path="/tentang" element={<Tentang />} />
+            <Route path="/refleksi" element={<RefleksiList />} />
+            <Route path="/refleksi-pengalaman" element={<RefleksiPengalaman />} />
+            <Route path="/kaitan-praktis" element={<KaitanPraktis />} />
+            <Route path="/desain-karya" element={<DesainKaryaInovatif />} />
+            <Route path="/dokumentasi" element={<Dokumentasi />} />
+            <Route path="/artefak" element={<Artefak />} />
+            <Route path="/kelola" element={<Kelola />} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </AuthProvider>
   );
 }
 
