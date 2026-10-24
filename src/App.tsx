@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from '@/contexts/AuthContext';
+import { AuthProvider } from '@/lib/auth';
 import Layout from '@/components/Layout';
 import Beranda from '@/pages/Beranda';
 import Tentang from '@/pages/Tentang';
