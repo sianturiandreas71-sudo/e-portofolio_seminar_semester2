@@ -6,8 +6,51 @@ import PDFViewer from '@/components/PDFViewer';
 
 type Tab = 'pdf' | 'summary' | 'analysis';
 
+const DEFAULT_REFLECTIONS: Reflection[] = [
+  {
+    id: '1',
+    course: 'Pembelajaran Mendalam dan Asesmen (PMA)',
+    description: 'Refleksi penerapan asesmen dan strategi pembelajaran mendalam pada mata pelajaran PJOK.',
+    focus: 'Desain Universal untuk Pembelajaran (DUP) & Teaching at the Right Level (TaRL)',
+    pdf_url: '',
+    sort_order: 1,
+  },
+  {
+    id: '2',
+    course: 'Pengantar Pendidikan untuk Anak Berkebutuhan Khusus',
+    description: 'Refleksi penyesuaian pembelajaran PJOK inklusif bagi peserta didik dengan beragam kebutuhan fisik dan motorik.',
+    focus: 'Pembelajaran Inklusif & Adaptasi Olahraga',
+    pdf_url: '',
+    sort_order: 2,
+  },
+  {
+    id: '3',
+    course: 'Prinsip Pengajaran dan Asesmen II',
+    description: 'Evaluasi penerapan modul ajar PJOK berbasis siklus perencanaan, pelaksanaan, dan asesmen berkelanjutan.',
+    focus: 'Asesmen Formatif & Sumatif PJOK',
+    pdf_url: '',
+    sort_order: 3,
+  },
+  {
+    id: '4',
+    course: 'Pembelajaran Sosial Emosional (PSE)',
+    description: 'Integrasi kompetensi sosial emosional dalam aktivitas jasmani untuk membangun kerja sama siswa.',
+    focus: 'Kesadaran Diri & Manajemen Diri',
+    pdf_url: '',
+    sort_order: 4,
+  },
+  {
+    id: '5',
+    course: 'Praktik Pengalaman Lapangan II (PPL II)',
+    description: 'Refleksi pengalaman mengajar langsung di sekolah latihan dan penerapan berbagai pendekatan pembelajaran.',
+    focus: 'Praktik Mengajar Terintegrasi',
+    pdf_url: '',
+    sort_order: 5,
+  },
+];
+
 export default function RefleksiList() {
-  const [reflections, setReflections] = useState<Reflection[]>([]);
+  const [reflections, setReflections] = useState<Reflection[]>(DEFAULT_REFLECTIONS);
   const [loading, setLoading] = useState(true);
   const [pdfReflection, setPdfReflection] = useState<Reflection | null>(null);
   const [selected, setSelected] = useState<Reflection | null>(null);
@@ -18,7 +61,15 @@ export default function RefleksiList() {
       .select('*')
       .order('sort_order', { ascending: true })
       .then(({ data, error }) => {
-        if (!error && data) setReflections(data as Reflection[]);
+        if (!error && data && data.length > 0) {
+          setReflections(data as Reflection[]);
+        } else {
+          setReflections(DEFAULT_REFLECTIONS);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setReflections(DEFAULT_REFLECTIONS);
         setLoading(false);
       });
   }, []);
@@ -57,7 +108,7 @@ export default function RefleksiList() {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Refleksi</h1>
         <div className="w-16 h-0.5 bg-ppg-600 mx-auto mb-6" />
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-          Lima mata kuliah yang saya jalani selama Semester 2 PPG Prajabatan. Klik mata kuliah
+          Mata kuliah yang saya jalani selama Semester 2 PPG Prajabatan. Klik mata kuliah
           untuk membaca PDF refleksi, ringkasan 4C, dan analisis artefak.
         </p>
       </div>
@@ -152,7 +203,6 @@ function RefleksiDetail({
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-      {/* Back button */}
       <button
         onClick={onBack}
         className="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-ppg-600 transition-colors mb-8"
@@ -161,7 +211,6 @@ function RefleksiDetail({
         Kembali ke Refleksi
       </button>
 
-      {/* Title block */}
       <div className="mb-8">
         <p className="text-ppg-600 text-sm font-bold uppercase tracking-wider mb-2">
           Refleksi Mata Kuliah
@@ -176,7 +225,6 @@ function RefleksiDetail({
         )}
       </div>
 
-      {/* Tabs */}
       <div className="flex gap-1 border-b border-gray-200 mb-8 overflow-x-auto">
         {tabs.map((t) => (
           <button
@@ -194,7 +242,6 @@ function RefleksiDetail({
         ))}
       </div>
 
-      {/* Tab content */}
       {tab === 'pdf' && (
         <PdfTab reflection={reflection} onOpenPdf={onOpenPdf} />
       )}
